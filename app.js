@@ -14,7 +14,15 @@ var request = https.request(options, function(response) {
 	})
 
 	response.on('end', function() {
-		console.log("Body: ", body)
+		var repos = []
+		var json = JSON.parse(body)
+		json.forEach(function(repo){
+			repos.push({
+				name: repo.name,
+				description: repo.description
+			})
+		})
+		console.log('Repos ', repos)
 	})
 
 })
@@ -22,3 +30,5 @@ var request = https.request(options, function(response) {
 request.end()
 
 // a request can stay open until we close it as a response
+
+//
